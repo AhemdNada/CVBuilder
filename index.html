@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live CV Builder (A4 Multi-page)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .form-panel { max-height: 100vh; overflow-y: auto; }
+        .form-section { border: 1px solid #e5e7eb; border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; }
+        .form-section h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem; }
+        .form-panel input, .form-panel textarea { width: 100%; border: 1px solid #d1d5db; border-radius: 4px; padding: 0.5rem 0.75rem; margin-top: 0.25rem; }
+        .form-panel label { font-weight: 500; color: #374151; }
+        .icon { display: inline-block; width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; vertical-align: middle; fill: currentColor; }
+        .remove-btn { background: none; border: none; color: #ef4444; font-size: 1.5rem; line-height: 1; cursor: pointer; padding: 0; }
+
+        /* A4 Page Styles - More Compact */
+        .preview-area {
+            transform: scale(0.65);
+            transform-origin: top;
+        }
+        .page {
+            background: white;
+            width: 21cm;
+            height: 29.7cm;
+            padding: 1cm; /* Reduced padding */
+            margin: 0 auto 20px auto;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            box-sizing: border-box;
+            font-size: 10.5pt; /* Slightly smaller base font */
+            color: #333;
+            display: flex;
+            flex-direction: column;
+        }
+        .page h1, .page h2, .page h3, .page h4, .page p, .page span, .page a {
+            font-family: 'Inter', sans-serif;
+        }
+        .page .cv-header { margin-bottom: 0.5cm; flex-shrink: 0; } /* Reduced margin */
+        .page .cv-header h1 { font-size: 24pt; font-weight: 700; } /* Reduced font size */
+        .page .cv-header h2 { font-size: 15pt; font-weight: 500; color: #555; } /* Reduced font size */
+        .page .cv-contact { font-size: 9pt; margin-bottom: 0.6cm; flex-shrink: 0; } /* Reduced margin */
+        .page .cv-body { flex-grow: 1; overflow: hidden;}
+        .page .cv-section { margin-bottom: 0.5cm; } /* Reduced margin */
+        .page .cv-section h3 {
+            font-size: 14pt; /* Reduced section title font size */
+            font-weight: 700;
+            border-bottom: 3px solid #000000;
+            padding-bottom: 3px;
+            margin-bottom: 8px; /* Reduced margin */
+        }
+         @media (max-width: 1024px) {
+            body, main { flex-direction: column; }
+            .preview-area { transform: scale(0.9); margin-top: 2rem; }
+            .form-panel { max-height: none; order: 1; }
+            .preview-panel { order: 2; }
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+
+    <main class="flex w-full">
+        <!-- Left Side: Form Panel -->
+        <div class="w-full lg:w-1/2 p-6 form-panel">
+            <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">CV Information</h2>
+            
+            <div class="form-section">
+                <h3>Personal Details</h3>
+                <div class="space-y-4">
+                    <div><label for="input-name">Full Name</label><input type="text" id="input-name" value="Ahmed Nada"></div>
+                    <div><label for="input-title">Job Title</label><input type="text" id="input-title" value="Full-Stack Developer"></div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h3>Contact Info</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div><label for="input-email">Email</label><input type="email" id="input-email" value="ahmednadaahmed79@gmail.com"></div>
+                    <div><label for="input-phone">Phone</label><input type="tel" id="input-phone" value="+01507797027"></div>
+                    <div><label for="input-location">Location</label><input type="text" id="input-location" value="Alex,Egypt"></div>
+                </div>
+                <div id="social-links-container" class="mt-4 space-y-4">
+                    <!-- Social links will be added here dynamically -->
+                </div>
+                <button type="button" id="add-social-btn" class="mt-4 bg-indigo-500 text-white py-2 px-4 rounded hover:bg-indigo-600">Add Social Link</button>
+            </div>
+
+            <div class="form-section">
+                <h3>Profile</h3>
+                <div><label for="input-profile">Profile Summary</label><textarea id="input-profile" rows="5">A passionate and detail-oriented Full Stack Web Developer with strong experience in building responsive and user-friendly interfaces using HTML, CSS, JavaScript, and Tailwind CSS. Skilled in backend development with Node.js and Express, and proficient in working with MySQL databases.I have developed and deployed several full-stack projects, including my own portfolio website, showcasing real-world applications and dynamic features.Experienced in consuming and integrating various RESTful APIs, with a solid understanding of web security principles and best practices to ensure secure and efficient applications.A quick learner with a proactive attitude, always eager to adopt new technologies and deliver high-quality solutions.</textarea></div>
+            </div>
+
+            <div class="form-section">
+                <h3>Education</h3>
+                <div id="education-form-container" class="space-y-6"></div>
+                <button type="button" id="add-education-btn" class="mt-4 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">Add Education</button>
+            </div>
+
+            <div class="form-section">
+                <h3>Skills</h3>
+                <div><label for="input-skills">Skills (comma-separated)</label><textarea id="input-skills" rows="4">HTML, CSS, JavaScript, Tailwind CSS, Node.js, Express.js, MySQL, MySQL Workbench, Git, GitHub, ASP.NET Web API, Design Patterns </textarea></div>
+            </div>
+            
+            <div class="form-section">
+                <h3>Projects</h3>
+                <div id="projects-form-container" class="space-y-6"></div>
+                <button type="button" id="add-project-btn" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Add Project</button>
+            </div>
+
+            <div class="form-section">
+                <h3>Languages</h3>
+                <div id="languages-form-container" class="space-y-4"></div>
+                <button type="button" id="add-language-btn" class="mt-4 bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600">Add Language</button>
+            </div>
+
+            <div class="form-section">
+                <h3>Download CV</h3>
+                <div class="flex flex-wrap gap-2">
+                    <button type="button" id="download-pdf-btn" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 flex items-center"><i class="far fa-file-pdf mr-2"></i>Download PDF</button>
+                    <button type="button" id="download-jpg-btn" class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 flex items-center"><i class="far fa-file-image mr-2"></i>Download JPG</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Live Preview Panel -->
+        <div class="w-full lg:w-1/2 flex justify-center items-start p-6 preview-panel bg-gray-300">
+            <div id="preview-area" class="preview-area">
+                <!-- Pages will be generated here by JS -->
+            </div>
+        </div>
+    </main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+<script src="https://unpkg.com/html-docx-js/dist/html-docx.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const formPanel = document.querySelector('.form-panel');
+
+    // Check if required libraries are loaded
+    function checkLibraries() {
+        const libraries = {
+            'jsPDF': typeof window.jspdf !== 'undefined',
+            'html2canvas': typeof html2canvas !== 'undefined',
+            'FileSaver': typeof saveAs !== 'undefined'
+        };
+        
+        const missingLibraries = Object.entries(libraries)
+            .filter(([name, loaded]) => !loaded)
+            .map(([name]) => name);
+            
+        if (missingLibraries.length > 0) {
+            console.warn('Missing libraries:', missingLibraries);
+            return false;
+        }
+        
+        console.log('All required libraries loaded successfully');
+        return true;
+    }
+
+    // Check libraries after a short delay to ensure they're loaded
+    setTimeout(() => {
+        if (!checkLibraries()) {
+            console.error('Some required libraries failed to load. Download functionality may not work.');
+        }
+        
+        // Test if download buttons exist
+        const pdfBtn = document.getElementById('download-pdf-btn');
+        const jpgBtn = document.getElementById('download-jpg-btn');
+        
+        if (pdfBtn) {
+            console.log('PDF download button found');
+        } else {
+            console.error('PDF download button not found!');
+        }
+        
+        if (jpgBtn) {
+            console.log('JPG download button found');
+        } else {
+            console.error('JPG download button not found!');
+        }
+    }, 2000); // Increased to 2 seconds
+
+    // --- TEMPLATES for dynamic entries ---
+    const educationTemplate = `<div class="education-entry p-4 border rounded-md relative"><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div><label>Degree</label><input type="text" class="input-edu-degree" value=""></div><div><label>University</label><input type="text" class="input-edu-university" value=""></div><div><label>Years</label><input type="text" class="input-edu-years" value=""></div><div><label>Location</label><input type="text" class="input-edu-location" value=""></div></div><button type="button" class="remove-btn absolute top-2 right-2">&times;</button></div>`;
+    const projectTemplate = `<div class="project-entry p-4 border rounded-md relative"><div class="space-y-4"><div><label>Project Title</label><input type="text" class="input-project-title" value=""></div><div><label>Project Description</label><textarea class="input-project-desc" rows="4"></textarea></div></div><button type="button" class="remove-btn absolute top-2 right-2">&times;</button></div>`;
+    const languageTemplate = `<div class="language-entry flex items-center gap-2"><input type="text" class="input-language" placeholder="e.g., English" value=""><button type="button" class="remove-btn">&times;</button></div>`;
+    const socialTemplate = `<div class="social-entry p-4 border rounded-md relative"><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div><label>Platform</label><select class="input-social-platform w-full border border-gray-300 rounded px-3 py-2"><option value="">Select Platform</option><option value="LinkedIn">LinkedIn</option><option value="GitHub">GitHub</option><option value="Twitter">Twitter</option><option value="Instagram">Instagram</option><option value="Facebook">Facebook</option><option value="Portfolio">Portfolio</option></select></div><div><label>Username/Profile</label><input type="text" class="input-social-profile" placeholder="e.g., ahmed-nada" value=""></div></div><button type="button" class="remove-btn absolute top-2 right-2">&times;</button></div>`;
+
+    // --- Master Update Function ---
+    function updatePreview() {
+        const previewArea = document.getElementById('preview-area');
+        previewArea.innerHTML = ''; // Clear previous pages
+
+        // Helper to create a DOM node from an HTML string
+        function createNodeFromHTML(htmlString) {
+            const div = document.createElement('div');
+            div.innerHTML = htmlString.trim();
+            return div.firstChild;
+        }
+
+        // 1. Collect all content pieces as DOM nodes
+        const contentNodes = [];
+
+        // Profile 
+        contentNodes.push(
+  createNodeFromHTML(`
+    <div class="cv-section">
+      <h3 id="preview-profile-title">
+        <i class="fa-solid fa-address-card text-main-color mr-2"></i>Profile
+      </h3>
+      <p>${document.getElementById('input-profile').value.replace(/\n/g, '<br>')}</p>
+    </div>
+  `)
+);
+
+        // Education
+        const eduEntries = document.querySelectorAll('.education-entry');
+if (eduEntries.length > 0) {
+    let eduHTML = `
+        <div class="cv-section">
+            <h3 id="preview-education-title">
+                <i class="fas fa-graduation-cap text-main-color mr-2"></i>Education
+            </h3>
+    `;
+    eduEntries.forEach(entry => {
+        eduHTML += `
+            <div class="flex justify-between items-start mb-2">
+                <div>
+                    <p class="font-semibold">${entry.querySelector('.input-edu-degree').value}</p>
+                    <p class="text-gray-600 text-sm">${entry.querySelector('.input-edu-university').value}</p>
+                </div>
+                <div class="text-right">
+                    <p class="font-semibold">${entry.querySelector('.input-edu-years').value}</p>
+                    <p class="text-gray-600 text-sm">${entry.querySelector('.input-edu-location').value}</p>
+                </div>
+            </div>
+        `;
+    });
+    eduHTML += '</div>';
+    contentNodes.push(createNodeFromHTML(eduHTML));
+}
+
+
+        // Skills
+const skills = document.getElementById('input-skills').value.split(',').map(s => s.trim()).filter(Boolean);
+if (skills.length > 0) {
+    let skillsHTML = `
+        <div class="cv-section">
+            <h3 id="preview-skills-title">
+                <i class="fas fa-tools text-main-color mr-2"></i>Skills
+            </h3>
+            <div class="grid grid-cols-3 gap-x-8 gap-y-1">
+    `;
+    skills.forEach(skill => {
+        skillsHTML += `<span>• ${skill}</span>`;
+    });
+    skillsHTML += '</div></div>';
+    contentNodes.push(createNodeFromHTML(skillsHTML));
+}
+
+// Projects (granularly)
+const projectEntries = document.querySelectorAll('.project-entry');
+if (projectEntries.length > 0) {
+    // Add header with icon
+    contentNodes.push(createNodeFromHTML(`
+        <div class="cv-section">
+            <h3 id="preview-projects-title">
+                <i class="fas fa-folder-open text-main-color mr-2"></i>Projects
+            </h3>
+        </div>
+    `));
+
+    // Add each project item as a separate node
+    projectEntries.forEach(entry => {
+        const projectItemHTML = `
+            <div class="project-item mb-4">
+                <h4 class="font-bold">${entry.querySelector('.input-project-title').value}</h4>
+                <p class="mt-1 text-sm leading-relaxed">
+                    ${entry.querySelector('.input-project-desc').value.replace(/\n/g, '<br>')}
+                </p>
+            </div>
+        `;
+        contentNodes.push(createNodeFromHTML(projectItemHTML));
+    });
+}
+
+
+        // Languages
+        const langEntries = document.querySelectorAll('.language-entry');
+const validLangs = Array.from(langEntries)
+    .map(entry => entry.querySelector('.input-language').value)
+    .filter(Boolean);
+
+if (validLangs.length > 0) {
+    let langsHTML = `
+        <div class="cv-section">
+            <h3 id="preview-languages-title">
+                <i class="fa-solid fa-earth-americas text-main-color mr-2"></i>Languages
+            </h3>
+            <div class="flex space-x-12">
+    `;
+    validLangs.forEach(lang => {
+        langsHTML += `<span>• ${lang}</span>`;
+    });
+    langsHTML += '</div></div>';
+    contentNodes.push(createNodeFromHTML(langsHTML));
+}
+
+
+
+        // 2. Paginate the nodes
+        let currentPage = createNewPage(previewArea);
+        let body = currentPage.querySelector('.cv-body');
+        const availableHeight = body.clientHeight;
+
+        for (const node of contentNodes) {
+            body.appendChild(node);
+            if (body.scrollHeight > availableHeight) {
+                body.removeChild(node);
+                currentPage = createNewPage(previewArea);
+                body = currentPage.querySelector('.cv-body');
+                body.appendChild(node);
+            }
+        }
+    }
+    
+    function createNewPage(container) {
+    const page = document.createElement('div');
+    page.className = 'page';
+    
+    // Collect social links
+    const socialEntries = document.querySelectorAll('.social-entry');
+    let socialLinksHTML = '';
+    socialEntries.forEach(entry => {
+        const platform = entry.querySelector('.input-social-platform').value;
+        const profile = entry.querySelector('.input-social-profile').value;
+        if (platform && profile) {
+            let iconClass = 'fas fa-link'; // default icon
+            switch(platform.toLowerCase()) {
+                case 'linkedin':
+                    iconClass = 'fab fa-linkedin';
+                    break;
+                case 'github':
+                    iconClass = 'fab fa-github';
+                    break;
+                case 'twitter':
+                    iconClass = 'fab fa-twitter';
+                    break;
+                case 'instagram':
+                    iconClass = 'fab fa-instagram';
+                    break;
+                case 'facebook':
+                    iconClass = 'fab fa-facebook';
+                    break;
+                case 'portfolio':
+                    iconClass = 'fas fa-briefcase';
+                    break;
+            }
+            socialLinksHTML += `<span><i class="${iconClass} text-main-color mr-1"></i>${profile}</span>`;
+        }
+    });
+    
+    const headerHTML = `
+        <header class="cv-header text-center">
+            <h1>${document.getElementById('input-name').value}</h1>
+            <h2>${document.getElementById('input-title').value}</h2>
+        </header>
+        <div class="cv-contact flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-sm text-gray-700">
+            <span><i class="fas fa-envelope text-main-color mr-1"></i>${document.getElementById('input-email').value}</span>
+            <span><i class="fas fa-phone text-main-color mr-1"></i>${document.getElementById('input-phone').value}</span>
+            <span><i class="fas fa-map-marker-alt text-main-color mr-1"></i>${document.getElementById('input-location').value}</span>
+            ${socialLinksHTML}
+        </div>
+        <main class="cv-body"></main>
+    `;
+    
+    page.innerHTML = headerHTML;
+    container.appendChild(page);
+    return page;
+}
+
+    // --- Event Delegation ---
+    formPanel.addEventListener('input', updatePreview);
+
+    formPanel.addEventListener('click', function(e) {
+        const target = e.target;
+        let containerId = null;
+        let template = null;
+        
+        if (target.id === 'add-education-btn') {
+            containerId = 'education-form-container';
+            template = educationTemplate;
+        } else if (target.id === 'add-project-btn') {
+            containerId = 'projects-form-container';
+            template = projectTemplate;
+        } else if (target.id === 'add-language-btn') {
+            containerId = 'languages-form-container';
+            template = languageTemplate;
+        } else if (target.id === 'add-social-btn') {
+            containerId = 'social-links-container';
+            template = socialTemplate;
+        } else if (target.classList.contains('remove-btn')) {
+            target.closest('.education-entry, .project-entry, .language-entry, .social-entry').remove();
+            updatePreview();
+        }
+        
+        if(containerId && template) {
+            document.getElementById(containerId).insertAdjacentHTML('beforeend', template);
+            updatePreview();
+        }
+    });
+
+    // --- Initial Population ---
+    function addInitialEntry(section, data) {
+        let containerId = '';
+        if (section === 'education') containerId = 'education-form-container';
+        else if (section === 'projects') containerId = 'projects-form-container';
+        else if (section === 'languages') containerId = 'languages-form-container';
+        else if (section === 'social') containerId = 'social-links-container';
+        
+        const container = document.getElementById(containerId);
+        if (!container) {
+            console.error(`Container not found: ${containerId}`);
+            return;
+        }
+        
+        let template = '';
+        if (section === 'education') template = educationTemplate;
+        else if (section === 'projects') template = projectTemplate;
+        else if (section === 'languages') template = languageTemplate;
+        else if (section === 'social') template = socialTemplate;
+        
+        container.insertAdjacentHTML('beforeend', template);
+        const newEntry = container.lastElementChild;
+
+        if (section === 'education') {
+            newEntry.querySelector('.input-edu-degree').value = data.degree || '';
+            newEntry.querySelector('.input-edu-university').value = data.university || '';
+            newEntry.querySelector('.input-edu-years').value = data.years || '';
+            newEntry.querySelector('.input-edu-location').value = data.location || '';
+        } else if (section === 'projects') {
+             newEntry.querySelector('.input-project-title').value = data.title || '';
+             newEntry.querySelector('.input-project-desc').value = data.desc || '';
+        } else if (section === 'languages') {
+            newEntry.querySelector('.input-language').value = data.lang || '';
+        } else if (section === 'social') {
+            newEntry.querySelector('.input-social-platform').value = data.platform || '';
+            newEntry.querySelector('.input-social-profile').value = data.profile || '';
+        }
+        
+        // Update preview after adding each entry
+        updatePreview();
+    }
+
+    // Populate with initial data
+    setTimeout(() => {
+        addInitialEntry('education', { degree: 'Computer Science and Artificial Intelligence', university: 'El Alamein, Egypt', years: '2022 - 2026', location: 'Alex,Egypt' });
+        addInitialEntry('projects', { title: 'Modern Portfolio', desc: 'My project is a modern portfolio website that showcases my work, skills, and certifications in a clean, professional layout. It features project highlights, an interactive contact form, and a comment section for user engagement — all designed to reflect my identity and offer a smooth user experience.' });
+        addInitialEntry('languages', { lang: 'Arabic' });
+        addInitialEntry('languages', { lang: 'English' });
+        addInitialEntry('social', { platform: 'LinkedIn', profile: 'ahmed-nada-05a536316' });
+        addInitialEntry('social', { platform: 'GitHub', profile: 'AhemdNada' });
+        
+        // Final update to ensure everything is displayed
+        updatePreview();
+    }, 500);
+
+    // --- Download Functionality ---
+    document.getElementById('download-pdf-btn').addEventListener('click', async () => {
+        console.log('PDF button clicked!');
+        try {
+            if (typeof window.jspdf === 'undefined' || typeof html2canvas === 'undefined') {
+                alert('A required library (jsPDF or html2canvas) is not loaded. Please refresh and try again.');
+                return;
+            }
+            
+            const { jsPDF } = window.jspdf;
+            const previewArea = document.getElementById('preview-area');
+            const pages = previewArea.querySelectorAll('.page');
+            
+            if (pages.length === 0) {
+                alert('CV preview is empty. Please add some content first.');
+                return;
+            }
+
+            const originalTransform = previewArea.style.transform;
+            previewArea.style.transform = 'scale(1)';
+            // Add a class to hide scrollbars during capture
+            previewArea.classList.add('is-capturing');
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            const doc = new jsPDF('p', 'pt', 'a4', true);
+
+            for (let i = 0; i < pages.length; i++) {
+                const page = pages[i];
+                const canvas = await html2canvas(page, { 
+                    scale: 2, // <--- Increased scale for better quality
+                    useCORS: true,
+                    logging: false,
+                    width: page.offsetWidth,
+                    height: page.offsetHeight,
+                    backgroundColor: '#ffffff'
+                });
+                const imgData = canvas.toDataURL('image/png');
+                const pdfWidth = doc.internal.pageSize.getWidth();
+                const pdfHeight = doc.internal.pageSize.getHeight();
+                
+                if (i > 0) {
+                    doc.addPage();
+                }
+                doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
+            }
+            
+            doc.save('cv.pdf');
+            
+            previewArea.style.transform = originalTransform;
+            previewArea.classList.remove('is-capturing');
+            
+        } catch (error) {
+            console.error('Error generating PDF:', error);
+            alert('An error occurred while generating the PDF. Check the console for details.');
+        }
+    });
+
+    document.getElementById('download-jpg-btn').addEventListener('click', async () => {
+        console.log('JPG button clicked!');
+        try {
+            if (typeof html2canvas === 'undefined') {
+                alert('html2canvas library not loaded. Please refresh and try again.');
+                return;
+            }
+
+            const previewArea = document.getElementById('preview-area');
+            const pages = previewArea.querySelectorAll('.page');
+
+            if (pages.length === 0) {
+                alert('CV preview is empty. Please add some content first.');
+                return;
+            }
+
+            const originalTransform = previewArea.style.transform;
+            previewArea.style.transform = 'scale(1)';
+            previewArea.classList.add('is-capturing');
+            await new Promise(resolve => setTimeout(resolve, 100));
+
+            for (let i = 0; i < pages.length; i++) {
+                const page = pages[i];
+                const canvas = await html2canvas(page, {
+                    scale: 2, // <--- Increased scale for better quality
+                    useCORS: true,
+                    logging: false,
+                    width: page.offsetWidth,
+                    height: page.offsetHeight,
+                    backgroundColor: '#ffffff'
+                });
+
+                const image = canvas.toDataURL('image/jpeg', 0.95); // High quality JPEG
+
+                const link = document.createElement('a');
+                link.href = image;
+                link.download = `cv-page-${i + 1}.jpg`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+
+                if (i < pages.length - 1) {
+                    await new Promise(resolve => setTimeout(resolve, 300));
+                }
+            }
+
+            previewArea.style.transform = originalTransform;
+            previewArea.classList.remove('is-capturing');
+
+        } catch (error) {
+            console.error('Error in JPG generation:', error);
+            alert('An error occurred while generating the JPG. Check the console for details.');
+        }
+    });
+});
+</script>
+
+</body>
+</html>
