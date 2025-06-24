@@ -2,590 +2,1213 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- resposive for screen in all devices -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live CV Builder (A4 Multi-page)</title>
+    <title>CV Builder</title>
+    <!-- Tailwind script -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- animate css script -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <!-- icon page -->
+    <link rel="icon" href="images/profile.png" type="image/x-icon">
+    <!-- css file-->
+    <link rel="stylesheet" href="CSS/styles.css">
+    <!-- AOS CSS (keep only the latest version) -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
 
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .form-panel { max-height: 100vh; overflow-y: auto; }
-        .form-section { border: 1px solid #e5e7eb; border-radius: 8px; padding: 1rem; margin-bottom: 1.5rem; }
-        .form-section h3 { font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; border-bottom: 1px solid #e5e7eb; padding-bottom: 0.5rem; }
-        .form-panel input, .form-panel textarea { width: 100%; border: 1px solid #d1d5db; border-radius: 4px; padding: 0.5rem 0.75rem; margin-top: 0.25rem; }
-        .form-panel label { font-weight: 500; color: #374151; }
-        .icon { display: inline-block; width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; vertical-align: middle; fill: currentColor; }
-        .remove-btn { background: none; border: none; color: #ef4444; font-size: 1.5rem; line-height: 1; cursor: pointer; padding: 0; }
-
-        /* A4 Page Styles - More Compact */
-        .preview-area {
-            transform: scale(0.65);
-            transform-origin: top;
-        }
-        .page {
-            background: white;
-            width: 21cm;
-            height: 29.7cm;
-            padding: 1cm; /* Reduced padding */
-            margin: 0 auto 20px auto;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            box-sizing: border-box;
-            font-size: 10.5pt; /* Slightly smaller base font */
-            color: #333;
-            display: flex;
-            flex-direction: column;
-        }
-        .page h1, .page h2, .page h3, .page h4, .page p, .page span, .page a {
-            font-family: 'Inter', sans-serif;
-        }
-        .page .cv-header { margin-bottom: 0.5cm; flex-shrink: 0; } /* Reduced margin */
-        .page .cv-header h1 { font-size: 24pt; font-weight: 700; } /* Reduced font size */
-        .page .cv-header h2 { font-size: 15pt; font-weight: 500; color: #555; } /* Reduced font size */
-        .page .cv-contact { font-size: 9pt; margin-bottom: 0.6cm; flex-shrink: 0; } /* Reduced margin */
-        .page .cv-body { flex-grow: 1; overflow: hidden;}
-        .page .cv-section { margin-bottom: 0.5cm; } /* Reduced margin */
-        .page .cv-section h3 {
-            font-size: 14pt; /* Reduced section title font size */
-            font-weight: 700;
-            border-bottom: 3px solid #000000;
-            padding-bottom: 3px;
-            margin-bottom: 8px; /* Reduced margin */
-        }
-         @media (max-width: 1024px) {
-            body, main { flex-direction: column; }
-            .preview-area { transform: scale(0.9); margin-top: 2rem; }
-            .form-panel { max-height: none; order: 1; }
-            .preview-panel { order: 2; }
-        }
-    </style>
 </head>
-<body class="bg-gray-100">
+<body class="bg-gray-50">
 
-    <main class="flex w-full">
-        <!-- Left Side: Form Panel -->
-        <div class="w-full lg:w-1/2 p-6 form-panel">
-            <h2 class="text-3xl font-bold mb-6 text-center text-gray-800">CV Information</h2>
+    
+    <div id="landing-page">
+        
+       <!-- Start Navbar -->
+        <nav class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-100 transition-all duration-300 hover:shadow-md">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16 md:h-20">
+                    <!-- start Logo -->
+                    <div class="flex items-center">
+                        <div class="flex items-center justify-center w-10 h-10 rounded-lg bg-indigo-600 text-white mr-3 transform hover:rotate-12 transition-transform duration-300">
+                            <i class="fas fa-file-alt text-xl"></i>
+                        </div>
+                        <span class="text-xl font-bold bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">CV Builder </span>
+                    </div>
+                    <!-- end Logo -->
+
+                    <!-- start Desktop Navbar -->
+                    <div class="hidden md:flex items-center space-x-1">
+                        
+                        <a href="#how-it-works" class="px-4 py-2 text-gray-600 hover:text-indigo-600 font-medium rounded-lg transition-all duration-300 hover:bg-gray-50/50" id="nav-how-link">
+                            <span class="relative group">
+                                How It Works
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                            </span>
+                        </a>
+                        <a href="#features" class="px-4 py-2 text-gray-600 hover:text-indigo-600 font-medium rounded-lg transition-all duration-300 hover:bg-gray-50/50" id="nav-features-link">
+                            <span class="relative group">
+                                Features
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-indigo-600 transition-all duration-300 group-hover:w-full"></span>
+                            </span>
+                        </a>
+                        <button id="nav-get-started" class="group ml-4 px-6 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-medium rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 hover:scale-105 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-50">
+                            <i class="fas fa-rocket mr-2 transform transition-transform duration-300 group-hover:-translate-x-1"></i>
+                            Get Started
+                        </button>
+                        
+                    </div>
+                    <!-- end Desktop Navbar -->
+                    <!-- start Mobile Menu when screen small -->
+                    <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-md text-gray-600 hover:text-indigo-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50 transition-all duration-200">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                    <!-- end mobile menu when screen small -->
+                    
+                </div>
+            </div>
+            <!-- start Mobile Menu -->
+            <div id="mobile-menu"
+                class="hidden fixed top-[72px] right-4 bg-white rounded-xl shadow-lg border border-gray-200 z-40
+                        transition-transform duration-300 transform translate-x-0 max-w-[90vw] w-64">
+            <div class="flex flex-col px-4 py-4 space-y-3">
+                <a href="#how-it-works" id="mobile-how-link" class="text-gray-700 hover:text-indigo-600 font-medium">How It Works</a>
+
+                <a href="#features" id="mobile-features-link" class="text-gray-700 hover:text-indigo-600 font-medium" >Features</a>
+                <button id="mobile-get-started" class="px-4 py-2 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded shadow hover:shadow-md transition-all duration-200">
+                <i class="fas fa-rocket mr-2"></i>Get Started
+                </button>
+            </div>
+            </div>
+            <!-- end Mobile Menu -->
             
-            <div class="form-section">
-                <h3>Personal Details</h3>
-                <div class="space-y-4">
-                    <div><label for="input-name">Full Name</label><input type="text" id="input-name" value="Ahmed Nada"></div>
-                    <div><label for="input-title">Job Title</label><input type="text" id="input-title" value="Full-Stack Developer"></div>
-                </div>
-            </div>
-
-            <div class="form-section">
-                <h3>Contact Info</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div><label for="input-email">Email</label><input type="email" id="input-email" value="ahmednadaahmed79@gmail.com"></div>
-                    <div><label for="input-phone">Phone</label><input type="tel" id="input-phone" value="+01507797027"></div>
-                    <div><label for="input-location">Location</label><input type="text" id="input-location" value="Alex,Egypt"></div>
-                </div>
-                <div id="social-links-container" class="mt-4 space-y-4">
-                    <!-- Social links will be added here dynamically -->
-                </div>
-                <button type="button" id="add-social-btn" class="mt-4 bg-indigo-500 text-white py-2 px-4 rounded hover:bg-indigo-600">Add Social Link</button>
-            </div>
-
-            <div class="form-section">
-                <h3>Profile</h3>
-                <div><label for="input-profile">Profile Summary</label><textarea id="input-profile" rows="5">A passionate and detail-oriented Full Stack Web Developer with strong experience in building responsive and user-friendly interfaces using HTML, CSS, JavaScript, and Tailwind CSS. Skilled in backend development with Node.js and Express, and proficient in working with MySQL databases.I have developed and deployed several full-stack projects, including my own portfolio website, showcasing real-world applications and dynamic features.Experienced in consuming and integrating various RESTful APIs, with a solid understanding of web security principles and best practices to ensure secure and efficient applications.A quick learner with a proactive attitude, always eager to adopt new technologies and deliver high-quality solutions.</textarea></div>
-            </div>
-
-            <div class="form-section">
-                <h3>Education</h3>
-                <div id="education-form-container" class="space-y-6"></div>
-                <button type="button" id="add-education-btn" class="mt-4 bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600">Add Education</button>
-            </div>
-
-            <div class="form-section">
-                <h3>Skills</h3>
-                <div><label for="input-skills">Skills (comma-separated)</label><textarea id="input-skills" rows="4">HTML, CSS, JavaScript, Tailwind CSS, Node.js, Express.js, MySQL, MySQL Workbench, Git, GitHub, ASP.NET Web API, Design Patterns </textarea></div>
-            </div>
             
-            <div class="form-section">
-                <h3>Projects</h3>
-                <div id="projects-form-container" class="space-y-6"></div>
-                <button type="button" id="add-project-btn" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">Add Project</button>
-            </div>
+        </nav>
+        <!-- end Navbar -->
 
-            <div class="form-section">
-                <h3>Languages</h3>
-                <div id="languages-form-container" class="space-y-4"></div>
-                <button type="button" id="add-language-btn" class="mt-4 bg-purple-500 text-white py-2 px-4 rounded hover:bg-purple-600">Add Language</button>
-            </div>
-
-            <div class="form-section">
-                <h3>Download CV</h3>
-                <div class="flex flex-wrap gap-2">
-                    <button type="button" id="download-pdf-btn" class="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 flex items-center"><i class="far fa-file-pdf mr-2"></i>Download PDF</button>
-                    <button type="button" id="download-jpg-btn" class="bg-yellow-500 text-white py-2 px-4 rounded hover:bg-yellow-600 flex items-center"><i class="far fa-file-image mr-2"></i>Download JPG</button>
+        <!-- start home section -->
+        <section class="home-section text-white py-12 md:py-20 lg:py-28 xl:py-32 overflow-hidden h-screen flex items-center justify-center" data-aos="fade-up">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                    <!-- start Left Side -->
+                    <div class="lg:w-1/2 animate__animated animate__fadeInLeft">
+                        <h1 class="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold mb-6 leading-tight">
+                            Create Your <span class="text-yellow-300 bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 animate-text">Professional CV</span> in Minutes
+                        </h1>
+                        <p class="text-lg md:text-xl mb-8 text-blue-100 opacity-90 leading-relaxed">
+                            Impress employers with a beautifully designed CV that highlights your skills and experience.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 animate__animated animate__fadeInUp animate__delay-1s">
+                            <button id="hero-get-started" class="px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-indigo-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:from-indigo-700 hover:to-purple-700 transition-all duration-300 hover:shadow-xl transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">
+                                <i class="fas fa-rocket mr-2 sm:mr-3"></i>Start Building Now
+                            </button>
+                            <button id="hero-learn-more" class="px-6 py-3 sm:px-8 sm:py-4 bg-white bg-opacity-10 backdrop-blur-sm border border-white border-opacity-20 text-white font-semibold rounded-lg hover:bg-opacity-20 transition-all duration-300 hover:border-opacity-30 focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50">
+                                <i class="fas fa-info-circle mr-2 sm:mr-3"></i>Learn More
+                            </button>
+                        </div>
+                        
+                        <!-- Trust Indicators -->
+                        <div class="mt-10 flex flex-wrap gap-4 text-sm text-blue-100 opacity-80">
+                            <div class="flex items-center">
+                                <i class="fas fa-check-circle text-green-300 mr-2"></i>
+                                <span>No Signup Required</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-shield-alt text-blue-200 mr-2"></i>
+                                <span>100% Private</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-bolt text-yellow-300 mr-2"></i>
+                                <span>Instant Download</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end Left Side -->
+                    
+                    <!-- start Right Side -->
+                    <div class="lg:w-1/2 flex justify-center animate-float animate__animated animate__fadeInRight animate__delay-1s">
+                        <div class="relative w-full max-w-md">
+                            <!-- photo -->
+                            <img src="images/profile.png" alt="Professional CV Example" class="w-full h-auto rounded-lg shadow-2xl transform rotate-1 hover:rotate-0 transition-transform duration-500">
+                            <!--colors blurs around photo-->
+                            <div class="absolute -top-4 -left-4 w-16 h-16 bg-yellow-400 rounded-full opacity-20 blur-xl animate-pulse"></div>
+                            <div class="absolute -bottom-4 -right-4 w-20 h-20 bg-purple-400 rounded-full opacity-20 blur-xl animate-pulse delay-300"></div>
+                            
+                            
+                            <!-- start rated badge -->
+                            <div class="absolute -bottom-4 -left-4 bg-white text-indigo-700 px-3 py-1 rounded-full shadow-lg font-medium flex items-center transform -rotate-6 hover:rotate-0 transition-transform duration-300 text-xs sm:text-sm">
+                                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                                <span>Top Rated</span>
+                            </div>
+                            <div class="absolute -top-4 -right-4 bg-indigo-600 text-white px-3 py-1 rounded-full shadow-lg font-medium flex items-center transform rotate-6 hover:rotate-0 transition-transform duration-300 text-xs sm:text-sm">
+                                <i class="fas fa-download mr-1"></i>
+                                <span>10K+ CVs</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end Right side -->
                 </div>
+            </div>
+        </section>
+         <!-- end home section -->
+          
+        <!--start Problems Section -  -->
+        <section class="py-20 bg-white" data-aos="fade-up">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16" data-aos="fade-down">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 relative inline-block">
+                        <span class="section-title relative z-10">
+                            Struggling With CV Creation?
+                            <span class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-500 to-purple-600 transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                        </span>
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        Many job seekers face these common challenges when creating their CVs
+                    </p>
+                </div>
+                <!-- start all problems with 3 columns in 2 rows -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Problem Card 1 -->
+                    <div class="problem-card group relative bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100" data-aos="fade-left">
+                        <div class="p-8">
+                            <div class="text-red-500 text-5xl mb-6 transition-all duration-300 group-hover:text-red-600 group-hover:transform group-hover:scale-110">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800 group-hover:text-gray-900">Time Consuming</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Spending hours formatting and designing your CV from scratch, taking time away from job applications.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-400 to-red-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    
+                    <!-- Problem Card 2 -->
+                    <div class="problem-card group relative bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100" data-aos="fade-right">
+                        <div class="p-8">
+                            <div class="text-red-500 text-5xl mb-6 transition-all duration-300 group-hover:text-red-600 group-hover:transform group-hover:scale-110">
+                                <i class="fas fa-palette"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800 group-hover:text-gray-900">Design Challenges</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Struggling with layout, fonts, spacing, and making your CV look professional and modern.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-400 to-red-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    
+                    <!-- Problem Card 3 -->
+                    <div class="problem-card group relative bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100" data-aos="fade-up">
+                        <div class="p-8">
+                            <div class="text-red-500 text-5xl mb-6 transition-all duration-300 group-hover:text-red-600 group-hover:transform group-hover:scale-110">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800 group-hover:text-gray-900">Format Issues</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Dealing with PDF conversion problems, formatting inconsistencies, and compatibility issues.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-400 to-red-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    
+                    <!-- Problem Card 4 -->
+                    <div class="problem-card group relative bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100" data-aos="fade-down">
+                        <div class="p-8">
+                            <div class="text-red-500 text-5xl mb-6 transition-all duration-300 group-hover:text-red-600 group-hover:transform group-hover:scale-110">
+                                <i class="fas fa-eye-slash"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800 group-hover:text-gray-900">Poor Visibility</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Your CV gets lost in the pile because it doesn't stand out from generic templates.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-400 to-red-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    
+                    <!-- Problem Card 5 -->
+                    <div class="problem-card group relative bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100" data-aos="zoom-in">
+                        <div class="p-8">
+                            <div class="text-red-500 text-5xl mb-6 transition-all duration-300 group-hover:text-red-600 group-hover:transform group-hover:scale-110">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800 group-hover:text-gray-900">Not Mobile-Friendly</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Your CV doesn't display well on mobile devices where many recruiters first view applications.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-400 to-red-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    
+                    <!-- Problem Card 6 -->
+                    <div class="problem-card group relative bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100" data-aos="zoom-in-up">
+                        <div class="p-8">
+                            <div class="text-red-500 text-5xl mb-6 transition-all duration-300 group-hover:text-red-600 group-hover:transform group-hover:scale-110">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800 group-hover:text-gray-900">Hard to Update</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Making changes requires starting over or dealing with complex formatting issues.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-400 to-red-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                </div>
+                <!-- end all problems  -->
+            </div>
+        </section>
+        <!-- end Problems Sections -->
+
+        <!-- Start Solution Section  -->
+        <section class="py-20 bg-gradient-to-br from-gray-50 to-gray-100" data-aos="fade-up">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 relative inline-block">
+                        <span class="section-title relative z-10">
+                            Our Professional Solution
+                            <span class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-blue-600 transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                        </span>
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        CV Builder solves all these problems with an easy-to-use, powerful tool
+                    </p>
+                </div>
+                <!-- start all Solution with 3 columns in 2 rows -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Solution Card 1 -->
+                    <div class="solution-card group relative bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100" data-aos="fade-left">
+                        <div class="p-8">
+                            <div class="text-green-500 text-5xl mb-6 transition-all duration-300 group-hover:text-green-600 group-hover:transform group-hover:scale-110">
+                                <i class="fas fa-bolt"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800 group-hover:text-gray-900">Lightning Fast</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Create a professional CV in minutes, not hours. Our intuitive interface makes it simple and quick.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-green-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    
+                    <!-- Solution Card 2 -->
+                    <div class="solution-card group relative bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100" data-aos="fade-right">
+                        <div class="p-8">
+                            <div class="text-green-500 text-5xl mb-6 transition-all duration-300 group-hover:text-green-600 group-hover:transform group-hover:scale-110">
+                                <i class="fas fa-magic"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800 group-hover:text-gray-900">Professional Design</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Pre-designed templates that look great and follow industry standards. No design skills needed.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-green-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    
+                    <!-- Solution Card 3 -->
+                    <div class="solution-card group relative bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100" data-aos="fade-up">
+                        <div class="p-8">
+                            <div class="text-green-500 text-5xl mb-6 transition-all duration-300 group-hover:text-green-600 group-hover:transform group-hover:scale-110">
+                                <i class="fas fa-download"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800 group-hover:text-gray-900">Easy Export</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Download your CV as PDF or JPG instantly. Perfect for online applications and printing.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-green-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    <!-- Solution Card 4 -->
+                    <div class="solution-card group relative bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100"data-aos="fade-right">
+                        <div class="p-8">
+                            <div class="text-green-500 text-5xl mb-6 transition-all duration-300 group-hover:text-green-600 group-hover:transform group-hover:scale-110">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800 group-hover:text-gray-900">Live CV Preview</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                See your CV update instantly as you type.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-green-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    <!-- Solution Card 5 -->
+                    <div class="solution-card group relative bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100"data-aos="fade-up">
+                        <div class="p-8">
+                            <div class="text-green-500 text-5xl mb-6 transition-all duration-300 group-hover:text-green-600 group-hover:transform group-hover:scale-110">
+                                <i class="fas fa-mobile"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800 group-hover:text-gray-900">Fully Responsive</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Looks perfect on any device, ensuring recruiters see your best presentation everywhere.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-green-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+
+                    <!-- Solution Card 6 -->
+                    <div class="solution-card group relative bg-white rounded-xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border border-gray-100"data-aos="fade-left">
+                        <div class="p-8">
+                            <div class="text-green-500 text-5xl mb-6 transition-all duration-300 group-hover:text-green-600 group-hover:transform group-hover:scale-110">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-800 group-hover:text-gray-900">Privacy Focused</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Your data stays on your device. We don't store your personal information on our servers.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-green-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                </div>
+                <!-- end all Solution with 3 columns in 2 rows -->
+
+            </div>
+        </section>
+        <!-- end Solution Section -->
+
+        <!-- start how it work section -->
+        <section id="how-it-works" class="py-20 bg-gradient-to-b from-white to-gray-50" data-aos="fade-up">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 relative inline-block">
+                        <span class="section-title relative z-10">
+                            How It Works
+                            <span class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-600 transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                        </span>
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        Create your perfect CV in just a few simple steps
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-8 mb-16 relative">
+                    <!-- line connections steps-->
+                    <div class="hidden md:block absolute top-1/4 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 to-purple-500 transform -translate-y-1/2 z-0"></div>
+                    
+                    <!-- Step 1 -->
+                    <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100 z-10" data-aos="fade-left">
+                        <div class="p-8 text-center">
+                            <div class="feature-icon mx-auto mb-6 w-20 h-20 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 text-3xl transition-all duration-300 group-hover:bg-blue-100 group-hover:text-blue-600 group-hover:scale-110">
+                                <i class="fas fa-edit"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-800 group-hover:text-gray-900">1. Fill In Your Details</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Enter your personal information, work experience, education, and skills using our simple forms.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    
+                    <!-- Step 2 -->
+                    <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100 z-10" data-aos="fade-up">
+                        <div class="p-8 text-center">
+                            <div class="feature-icon mx-auto mb-6 w-20 h-20 rounded-full bg-purple-50 flex items-center justify-center text-purple-500 text-3xl transition-all duration-300 group-hover:bg-purple-100 group-hover:text-purple-600 group-hover:scale-110">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-800 group-hover:text-gray-900">2. Preview Instantly</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                See your CV update in real-time as you make changes. No waiting, no surprises.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-purple-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    
+                    <!-- Step 3 -->
+                    <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100 z-10" data-aos="fade-right">
+                        <div class="p-8 text-center">
+                            <div class="feature-icon mx-auto mb-6 w-20 h-20 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-500 text-3xl transition-all duration-300 group-hover:bg-indigo-100 group-hover:text-indigo-600 group-hover:scale-110">
+                                <i class="fas fa-file-download"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold mb-4 text-gray-800 group-hover:text-gray-900">3. Download & Share</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Download your CV as PDF or JPG with one click. Ready to send to employers!
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-400 to-indigo-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                </div>
+                
+                
+            </div>
+        </section>
+        <!-- end how it work section -->
+
+        <!-- start Features Section  -->
+        <section id="features" class="py-20 bg-white" data-aos="fade-up">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 relative inline-block">
+                        <span class="section-title relative z-10">
+                            Why Choose Our CV Builder?
+                            <span class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-blue-600 transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                        </span>
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        Professional features that make your CV stand out from the competition
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Feature 1 Live Preview -->
+                    <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100" data-aos="fade-left">
+                        <div class="p-6">
+                            <div class="text-blue-500 text-4xl mb-4 transition-all duration-300 group-hover:text-blue-600 group-hover:scale-110">
+                                <i class="fas fa-eye"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3 text-gray-800 group-hover:text-gray-900">Live Preview</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                See your changes instantly as you type. No surprises when you download.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    
+                    <!-- Feature 2 Mobile Friendly-->
+                    <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100" data-aos="fade-right">
+                        <div class="p-6">
+                            <div class="text-purple-500 text-4xl mb-4 transition-all duration-300 group-hover:text-purple-600 group-hover:scale-110">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3 text-gray-800 group-hover:text-gray-900">Mobile Friendly</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Works perfectly on all devices - desktop, tablet, and mobile.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-purple-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    
+                    <!-- Feature 3 Privacy First-->
+                    <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100" data-aos="fade-up">
+                        <div class="p-6">
+                            <div class="text-green-500 text-4xl mb-4 transition-all duration-300 group-hover:text-green-600 group-hover:scale-110">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3 text-gray-800 group-hover:text-gray-900">Privacy First</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Your data stays on your device. No information is stored on our servers.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-green-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    
+                    <!-- Feature 4 Professional Quality-->
+                    <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100" data-aos="fade-down">
+                        <div class="p-6">
+                            <div class="text-orange-500 text-4xl mb-4 transition-all duration-300 group-hover:text-orange-600 group-hover:scale-110">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3 text-gray-800 group-hover:text-gray-900">Professional Quality</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                A4 format, perfect for printing and professional applications.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-orange-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    
+                    <!-- Feature 5 Customizable-->
+                    <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100" data-aos="zoom-in">
+                        <div class="p-6">
+                            <div class="text-indigo-500 text-4xl mb-4 transition-all duration-300 group-hover:text-indigo-600 group-hover:scale-110">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3 text-gray-800 group-hover:text-gray-900">Customizable</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Add or remove sections to match your unique career path.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-400 to-indigo-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    
+                    <!-- Feature 6 Multiple Formats-->
+                    <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100" data-aos="zoom-in-up">
+                        <div class="p-6">
+                            <div class="text-red-500 text-4xl mb-4 transition-all duration-300 group-hover:text-red-600 group-hover:scale-110">
+                                <i class="fas fa-file-export"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3 text-gray-800 group-hover:text-gray-900">Multiple Formats</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Download as PDF or JPG to suit any application requirement.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-400 to-red-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    
+                    <!-- Feature 7 Unlimited Downloads-->
+                    <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100" data-aos="flip-left">
+                        <div class="p-6">
+                            <div class="text-yellow-500 text-4xl mb-4 transition-all duration-300 group-hover:text-yellow-600 group-hover:scale-110">
+                                <i class="fas fa-cloud-download-alt"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3 text-gray-800 group-hover:text-gray-900">Unlimited Downloads</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                Create and download as many versions as you need.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                    
+                    <!-- Feature 8 Free to Use-->
+                    <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100" data-aos="flip-right">
+                        <div class="p-6">
+                            <div class="text-pink-500 text-4xl mb-4 transition-all duration-300 group-hover:text-pink-600 group-hover:scale-110">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold mb-3 text-gray-800 group-hover:text-gray-900">Free to Use</h3>
+                            <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                                No hidden costs or subscriptions. Create your CV for free.
+                            </p>
+                        </div>
+                        <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-pink-400 to-pink-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Features Section  -->
+
+        <!-- start Ats tools section -->
+        <section class="py-16 home-section text-white" data-aos="fade-up">
+            <div class="container mx-auto px-6 text-center">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="text-3xl md:text-4xl font-bold mb-6">
+                Create & Optimize Your Professional CV
+                </h2>
+                <p class="text-xl mb-8 text-blue-100">
+                Build your CV in minutes, then optimize it using professional evaluation tools
+                </p>
+                <div class="mt-12 bg-white/10 backdrop-blur-sm rounded-xl p-6 md:p-8 border border-white/20">
+                <h3 class="text-xl md:text-2xl font-semibold mb-4 text-yellow-300">
+                    <i class="fas fa-search mr-2"></i>Evaluate Your CV Like a Pro
+                </h3>
+                <p class="mb-6 text-blue-100">
+                    After creating your CV, check its quality using these professional tools:
+                </p>
+                
+                <div class="grid md:grid-cols-2 gap-4 text-left">
+                    <!-- Resume Worded -->
+                    <a href="https://resumeworded.com" target="_blank" rel="noopener noreferrer" class="bg-white/5 p-4 rounded-lg border border-white/10 hover:border-yellow-300/50 transition-colors hover:bg-white/10 block">
+                    <div class="flex items-start">
+                        <div class="bg-blue-500/20 p-2 rounded-lg mr-4">
+                        <i class="fas fa-file-alt text-blue-300"></i>
+                        </div>
+                        <div>
+                        <h4 class="font-bold text-white">Resume Worded</h4>
+                        <p class="text-sm text-blue-100">Professional scoring with detailed feedback on keywords and ATS compatibility</p>
+                        <div class="mt-2 text-xs text-blue-300 flex items-center">
+                            <span>Visit site</span>
+                            <i class="fas fa-external-link-alt ml-1"></i>
+                        </div>
+                        </div>
+                    </div>
+                    </a>
+                    
+                    <!-- Jobscan -->
+                    <a href="https://www.jobscan.co" target="_blank" rel="noopener noreferrer" class="bg-white/5 p-4 rounded-lg border border-white/10 hover:border-yellow-300/50 transition-colors hover:bg-white/10 block">
+                    <div class="flex items-start">
+                        <div class="bg-purple-500/20 p-2 rounded-lg mr-4">
+                        <i class="fas fa-bullseye text-purple-300"></i>
+                        </div>
+                        <div>
+                        <h4 class="font-bold text-white">Jobscan</h4>
+                        <p class="text-sm text-blue-100">Compare your CV with job descriptions for better ATS matching</p>
+                        <div class="mt-2 text-xs text-blue-300 flex items-center">
+                            <span>Visit site</span>
+                            <i class="fas fa-external-link-alt ml-1"></i>
+                        </div>
+                        </div>
+                    </div>
+                    </a>
+                    
+                    <!-- Zety -->
+                    <a href="https://zety.com" target="_blank" rel="noopener noreferrer" class="bg-white/5 p-4 rounded-lg border border-white/10 hover:border-yellow-300/50 transition-colors hover:bg-white/10 block">
+                    <div class="flex items-start">
+                        <div class="bg-green-500/20 p-2 rounded-lg mr-4">
+                        <i class="fas fa-magic text-green-300"></i>
+                        </div>
+                        <div>
+                        <h4 class="font-bold text-white">Zety</h4>
+                        <p class="text-sm text-blue-100">Comprehensive evaluation of formatting, content, and language</p>
+                        <div class="mt-2 text-xs text-blue-300 flex items-center">
+                            <span>Visit site</span>
+                            <i class="fas fa-external-link-alt ml-1"></i>
+                        </div>
+                        </div>
+                    </div>
+                    </a>
+                    
+                    <!-- ResumeGenius -->
+                    <a href="https://resumegenius.com" target="_blank" rel="noopener noreferrer" class="bg-white/5 p-4 rounded-lg border border-white/10 hover:border-yellow-300/50 transition-colors hover:bg-white/10 block">
+                    <div class="flex items-start">
+                        <div class="bg-red-500/20 p-2 rounded-lg mr-4">
+                        <i class="fas fa-spell-check text-red-300"></i>
+                        </div>
+                        <div>
+                        <h4 class="font-bold text-white">ResumeGenius</h4>
+                        <p class="text-sm text-blue-100">Grammar checking and section formatting analysis</p>
+                        <div class="mt-2 text-xs text-blue-300 flex items-center">
+                            <span>Visit site</span>
+                            <i class="fas fa-external-link-alt ml-1"></i>
+                        </div>
+                        </div>
+                    </div>
+                    </a>
+                </div>
+                
+                <p class="mt-6 text-sm text-blue-200">
+                    <i class="fas fa-info-circle mr-2"></i>These tools help optimize your CV for Applicant Tracking Systems (ATS) and human recruiters
+                </p>
+                </div>
+                
+                <p class="mt-8 text-blue-100">
+                <i class="fas fa-lock-open mr-2"></i>No signup required - start building immediately
+                </p>
+            </div>
+            </div>
+        </section>
+        <!-- end Ats tools section -->
+
+    </div> 
+<!-- end navbar scroll section  -->
+
+
+        <!-- start CV Builder Section -->
+        <div id="cv-builder" class="bg-gray-50" data-aos="fade-up">
+            <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 relative inline-block">
+                        <span class="section-title relative z-10">
+                            CV Builder 
+                            <span class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-blue-600 transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                        </span>
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                        Fill in your information below and see your professional CV update in real-time
+                    </p>
+                </div>
+
+                <main class="flex flex-col lg:flex-row gap-6 pb-8 lg:items-stretch lg:min-h-[calc(100vh-180px)]">
+                    <!-- start Left Side information panael -->
+                    <div class="w-full lg:w-1/2 p-6 bg-gradient-to-br from-white via-blue-50 to-white rounded-xl shadow-lg border-[2.5px] border-indigo-600 h-full flex flex-col form-panel transition-all duration-300 hover:shadow-2xl">
+                        <!-- start Download Section -->
+                        <div class="form-section mb-8 bg-white transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600 rounded-xl">
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-4">
+                                <i class="fas fa-download text-indigo-600 mr-2"></i> Download CV
+                            </h3>
+                            <div class="flex flex-wrap gap-3">
+                                <button type="button" id="download-pdf-btn" class="btn-primary px-5 py-2.5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-lg hover:from-indigo-700 hover:to-purple-700 transition-colors duration-300 shadow-md hover:shadow-lg">
+                                    <i class="far fa-file-pdf mr-2"></i>Download PDF
+                                </button>
+                                <button type="button" id="download-jpg-btn" class="btn-outline px-5 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-300">
+                                    <i class="far fa-file-image mr-2"></i>Download JPG
+                                </button>
+                                <button type="button" id="print-btn" class="btn-outline px-5 py-2.5 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors duration-300">
+                                    <i class="fas fa-print mr-2"></i>Print CV
+                                </button>
+                            </div>
+                            <div class="mt-3 text-sm text-gray-500 flex items-center">
+                                <i class="fas fa-info-circle text-indigo-500 mr-2"></i>For best results, use Chrome or Firefox browser
+                            </div>
+                        </div>
+                        <!-- end Download Section -->
+                        <!-- start CV all Information Section -->
+                        <h2 class="text-2xl font-bold mb-6 text-center text-gray-800 border-b pb-3">CV Information</h2>
+                        
+                        <!-- start Personal Details  -->
+                        <div class="form-section mb-6 p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600">
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-user text-indigo-600 mr-2"></i> Personal Details
+                            </h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label for="input-name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                                    <input type="text" id="input-name" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., John Smith">
+                                </div>
+                                <div>
+                                    <label for="input-title" class="block text-sm font-medium text-gray-700 mb-1">Job Title</label>
+                                    <input type="text" id="input-title" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="e.g., Software Developer">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Contact  Section -->
+                        <div class="form-section mb-6 p-4 bg-gray-50 rounded-lg transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600">
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-address-book text-indigo-600 mr-2"></i> Contact Info
+                            </h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label for="input-email" class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                    <input type="email" id="input-email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="john.smith@email.com">
+                                </div>
+                                <div>
+                                    <label for="input-phone" class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                                    <input type="tel" id="input-phone" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="+1 234 567 8900">
+                                </div>
+                                <div>
+                                    <label for="input-location" class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                                    <input type="text" id="input-location" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" placeholder="New York, USA">
+                                </div>
+                            </div>
+                            <div id="social-links-container" class="mt-4 space-y-4">
+                                <!-- Social links will be added here  -->
+                            </div>
+                            <button type="button" id="add-social-btn" class="btn-secondary mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300 border border-gray-300 ">
+                                <i class="fas fa-plus mr-2"></i>Add Social Link
+                            </button>
+                        </div>
+
+                        <!-- Profile Section -->
+                        <div class="form-section section-draggable mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600" data-section="profile" draggable="true">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="drag-handle cursor-move text-gray-400 hover:text-gray-600" title="Drag to reorder">
+                                    <i class="fas fa-grip-vertical"></i>
+                                </span>
+                                <div class="section-controls flex justify-end space-x-1">
+                                    <button type="button" class="move-up-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Up">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button type="button" class="move-down-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Down">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-address-card text-indigo-600 mr-2"></i> Profile
+                            </h3>
+                            <div>
+                                <label for="input-profile" class="block text-sm font-medium text-gray-700 mb-1">Profile Summary</label>
+                                <textarea id="input-profile" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" rows="5" placeholder="Brief summary of your professional background, skills, and career objectives..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Education Section -->
+                        <div class="form-section section-draggable mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600" data-section="education" draggable="true">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="drag-handle cursor-move text-gray-400 hover:text-gray-600" title="Drag to reorder">
+                                    <i class="fas fa-grip-vertical"></i>
+                                </span>
+                                <div class="section-controls flex justify-end space-x-1">
+                                    <button type="button" class="move-up-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Up">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button type="button" class="move-down-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Down">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-graduation-cap text-indigo-600 mr-2"></i> Education
+                            </h3>
+                            <div id="education-form-container" class="space-y-6"></div>
+                            <button type="button" id="add-education-btn" class="btn-secondary mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300 border border-gray-300">
+                                <i class="fas fa-plus mr-2"></i>Add Education
+                            </button>
+                        </div>
+
+                        <!-- Skills Section -->
+                        <div class="form-section section-draggable mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600" data-section="skills">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="drag-handle cursor-move text-gray-400 hover:text-gray-600" title="Drag to reorder">
+                                    <i class="fas fa-grip-vertical"></i>
+                                </span>
+                                <div class="section-controls flex justify-end space-x-1">
+                                    <button type="button" class="move-up-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Up">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button type="button" class="move-down-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Down">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-tools text-indigo-600 mr-2"></i> Skills
+                            </h3>
+                            <div>
+                                <label for="input-skills" class="block text-sm font-medium text-gray-700 mb-1">Skills (comma-separated)</label>
+                                <textarea id="input-skills" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" rows="4" placeholder="e.g., JavaScript, React, Node.js, Python, SQL"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Projects Section -->
+                        <div class="form-section section-draggable mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600" data-section="projects" draggable="true">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="drag-handle cursor-move text-gray-400 hover:text-gray-600" title="Drag to reorder">
+                                    <i class="fas fa-grip-vertical"></i>
+                                </span>
+                                <div class="section-controls flex justify-end space-x-1">
+                                    <button type="button" class="move-up-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Up">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button type="button" class="move-down-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Down">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-folder-open text-indigo-600 mr-2"></i> Projects
+                            </h3>
+                            <div id="projects-form-container" class="space-y-6"></div>
+                            <button type="button" id="add-project-btn" class="btn-secondary mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300 border border-gray-300">
+                                <i class="fas fa-plus mr-2"></i>Add Project
+                            </button>
+                        </div>
+
+                        <!-- Languages Section -->
+                        <div class="form-section section-draggable mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600" data-section="languages" draggable="true">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="drag-handle cursor-move text-gray-400 hover:text-gray-600" title="Drag to reorder">
+                                    <i class="fas fa-grip-vertical"></i>
+                                </span>
+                                <div class="section-controls flex justify-end space-x-1">
+                                    <button type="button" class="move-up-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Up">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button type="button" class="move-down-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Down">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-language text-indigo-600 mr-2"></i> Languages
+                            </h3>
+                            <div id="languages-form-container" class="space-y-4"></div>
+                            <button type="button" id="add-language-btn" class="btn-secondary mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300 border border-gray-300">
+                                <i class="fas fa-plus mr-2"></i>Add Language
+                            </button>
+                        </div>
+
+                        <!-- Professional Experience Section -->
+                        <div class="form-section section-draggable mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600" data-section="experience" draggable="true">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="drag-handle cursor-move text-gray-400 hover:text-gray-600" title="Drag to reorder">
+                                    <i class="fas fa-grip-vertical"></i>
+                                </span>
+                                <div class="section-controls flex justify-end space-x-1">
+                                    <button type="button" class="move-up-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Up">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button type="button" class="move-down-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Down">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-briefcase text-indigo-600 mr-2"></i> Professional Experience
+                            </h3>
+                            <div id="experience-form-container" class="space-y-6"></div>
+                            <button type="button" id="add-experience-btn" class="btn-secondary mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300 border border-gray-300">
+                                <i class="fas fa-plus mr-2"></i>Add Experience
+                            </button>
+                        </div>
+
+                        <!-- Certificates Section -->
+                        <div class="form-section section-draggable mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600" data-section="certificates" draggable="true">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="drag-handle cursor-move text-gray-400 hover:text-gray-600" title="Drag to reorder">
+                                    <i class="fas fa-grip-vertical"></i>
+                                </span>
+                                <div class="section-controls flex justify-end space-x-1">
+                                    <button type="button" class="move-up-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Up">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button type="button" class="move-down-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Down">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-certificate text-indigo-600 mr-2"></i> Certificates
+                            </h3>
+                            <div id="certificates-form-container" class="space-y-6"></div>
+                            <button type="button" id="add-certificate-btn" class="btn-secondary mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300 border border-gray-300">
+                                <i class="fas fa-plus mr-2"></i>Add Certificate
+                            </button>
+                        </div>
+
+                        <!-- Courses Section -->
+                        <div class="form-section section-draggable mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600" data-section="courses" draggable="true">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="drag-handle cursor-move text-gray-400 hover:text-gray-600" title="Drag to reorder">
+                                    <i class="fas fa-grip-vertical"></i>
+                                </span>
+                                <div class="section-controls flex justify-end space-x-1">
+                                    <button type="button" class="move-up-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Up">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button type="button" class="move-down-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Down">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-book text-indigo-600 mr-2"></i> Courses
+                            </h3>
+                            <div id="courses-form-container" class="space-y-6"></div>
+                            <button type="button" id="add-course-btn" class="btn-secondary mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300 border border-gray-300">
+                                <i class="fas fa-plus mr-2"></i>Add Course
+                            </button>
+                        </div>
+
+                        <!-- Publications Section -->
+                        <div class="form-section section-draggable mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600" data-section="publications" draggable="true">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="drag-handle cursor-move text-gray-400 hover:text-gray-600" title="Drag to reorder">
+                                    <i class="fas fa-grip-vertical"></i>
+                                </span>
+                                <div class="section-controls flex justify-end space-x-1">
+                                    <button type="button" class="move-up-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Up">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button type="button" class="move-down-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Down">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-book-open text-indigo-600 mr-2"></i> Publications
+                            </h3>
+                            <div id="publications-form-container" class="space-y-6"></div>
+                            <button type="button" id="add-publication-btn" class="btn-secondary mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300 border border-gray-300">
+                                <i class="fas fa-plus mr-2"></i>Add Publication
+                            </button>
+                        </div>
+
+                        <!-- Awards Section -->
+                        <div class="form-section section-draggable mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600" data-section="awards" draggable="true">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="drag-handle cursor-move text-gray-400 hover:text-gray-600" title="Drag to reorder">
+                                    <i class="fas fa-grip-vertical"></i>
+                                </span>
+                                <div class="section-controls flex justify-end space-x-1">
+                                    <button type="button" class="move-up-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Up">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button type="button" class="move-down-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Down">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-trophy text-indigo-600 mr-2"></i> Awards
+                            </h3>
+                            <div id="awards-form-container" class="space-y-6"></div>
+                            <button type="button" id="add-award-btn" class="btn-secondary mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300 border border-gray-300">
+                                <i class="fas fa-plus mr-2"></i>Add Award
+                            </button>
+                        </div>
+
+                        <!-- Interests Section -->
+                        <div class="form-section section-draggable mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600" data-section="interests">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="drag-handle cursor-move text-gray-400 hover:text-gray-600" title="Drag to reorder">
+                                    <i class="fas fa-grip-vertical"></i>
+                                </span>
+                                <div class="section-controls flex justify-end space-x-1">
+                                    <button type="button" class="move-up-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Up">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button type="button" class="move-down-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Down">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-heart text-indigo-600 mr-2"></i> Interests
+                            </h3>
+                            <div>
+                                <label for="input-interests" class="block text-sm font-medium text-gray-700 mb-1">Interests (comma-separated)</label>
+                                <textarea id="input-interests" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" rows="3" placeholder="e.g., Reading, Football, Traveling"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Organisations Section -->
+                        <div class="form-section section-draggable mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600" data-section="organisations" draggable="true">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="drag-handle cursor-move text-gray-400 hover:text-gray-600" title="Drag to reorder">
+                                    <i class="fas fa-grip-vertical"></i>
+                                </span>
+                                <div class="section-controls flex justify-end space-x-1">
+                                    <button type="button" class="move-up-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Up">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button type="button" class="move-down-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Down">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-users text-indigo-600 mr-2"></i> Organisations
+                            </h3>
+                            <div id="organisations-form-container" class="space-y-6"></div>
+                            <button type="button" id="add-organisation-btn" class="btn-secondary mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300 border border-gray-300">
+                                <i class="fas fa-plus mr-2"></i>Add Organisation
+                            </button>
+                        </div>
+
+                        <!-- References Section -->
+                        <div class="form-section section-draggable mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600" data-section="references" draggable="true">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="drag-handle cursor-move text-gray-400 hover:text-gray-600" title="Drag to reorder">
+                                    <i class="fas fa-grip-vertical"></i>
+                                </span>
+                                <div class="section-controls flex justify-end space-x-1">
+                                    <button type="button" class="move-up-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Up">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button type="button" class="move-down-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Down">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-user-friends text-indigo-600 mr-2"></i> References
+                            </h3>
+                            <div id="references-form-container" class="space-y-6"></div>
+                            <button type="button" id="add-reference-btn" class="btn-secondary mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors duration-300 border border-gray-300">
+                                <i class="fas fa-plus mr-2"></i>Add Reference
+                            </button>
+                        </div>
+
+                        <!-- Declaration Section -->
+                        <div class="form-section section-draggable p-4 bg-gray-50 rounded-lg border border-gray-200 transition-all duration-300 hover:bg-gradient-to-br hover:from-white hover:via-blue-50 hover:to-white hover:shadow-md hover:border hover:border-indigo-600" data-section="declaration" draggable="true">
+                            <div class="flex justify-between items-center mb-2">
+                                <span class="drag-handle cursor-move text-gray-400 hover:text-gray-600" title="Drag to reorder">
+                                    <i class="fas fa-grip-vertical"></i>
+                                </span>
+                                <div class="section-controls flex justify-end space-x-1">
+                                    <button type="button" class="move-up-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Up">
+                                        <i class="fas fa-arrow-up"></i>
+                                    </button>
+                                    <button type="button" class="move-down-btn p-1 text-gray-500 hover:text-indigo-600" title="Move Down">
+                                        <i class="fas fa-arrow-down"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <h3 class="flex items-center text-lg font-semibold text-gray-800 mb-3">
+                                <i class="fas fa-pen-fancy text-indigo-600 mr-2"></i> Declaration
+                            </h3>
+                            <div>
+                                <label for="input-declaration" class="block text-sm font-medium text-gray-700 mb-1">Declaration Statement</label>
+                                <textarea id="input-declaration" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500" rows="3" placeholder="I hereby declare that the information provided is true and correct..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end Left Side information panael -->
+
+
+                    <!-- Right Side: Live Preview Panel -->
+                    <div class="w-full lg:w-1/2 p-6 bg-gradient-to-br from-white via-blue-50 to-white rounded-xl shadow-lg border-[2.5px] border-indigo-600 h-full flex flex-col preview-panel transition-all duration-300 hover:shadow-2xl">
+                        <div class="preview-container flex flex-col items-center justify-start h-full relative">
+                            <div id="preview-pagination" class="flex justify-center items-center mb-4"></div>
+                            <div id="preview-area" class="preview-area w-full overflow-auto">
+                                <!-- Pages will be generated here by JS -->
+                            </div>
+                            <div id="preview-loading" class="absolute inset-0 bg-white bg-opacity-70 flex items-center justify-center hidden">
+                                <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-indigo-500"></div>
+                            </div>
+                        </div>
+                        <div class="mt-4 text-center text-sm text-gray-500">
+                            <p class="mb-2">Scroll down to see all pages of your CV</p>
+                            <div class="flex justify-center space-x-2">
+                                <button id="zoom-in-btn" class="px-3 py-1 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                                    <i class="fas fa-search-plus"></i> Zoom In
+                                </button>
+                                <button id="zoom-out-btn" class="px-3 py-1 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                                    <i class="fas fa-search-minus"></i> Zoom Out
+                                </button>
+                                <button id="zoom-reset-btn" class="px-3 py-1 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors">
+                                    <i class="fas fa-search"></i> Reset
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </main>
             </div>
         </div>
+        <!-- end CV Builder Section -->
 
-        <!-- Right Side: Live Preview Panel -->
-        <div class="w-full lg:w-1/2 flex justify-center items-start p-6 preview-panel bg-gray-300">
-            <div id="preview-area" class="preview-area">
-                <!-- Pages will be generated here by JS -->
+        <!-- Footer -->
+        <footer class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-12">
+            <div class="container mx-auto px-6">
+                <!-- Main Footer Content -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+                    <!-- Brand Section -->
+                    <div class="text-center md:text-left">
+                        <div class="flex items-center justify-center md:justify-start mb-4">
+                            <i class="fas fa-file-alt text-3xl text-indigo-400 mr-3"></i>
+                            <h3 class="text-2xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">CV Builder </h3>
+                        </div>
+                        <p class="text-gray-300 text-sm leading-relaxed">
+                            Create stunning, professional CVs in minutes. Stand out from the crowd with our easy-to-use builder.
+                        </p>
+                    </div>
+
+                    <!-- Quick Links -->
+                    <div class="text-center md:text-left">
+                        <h4 class="text-lg font-semibold mb-4 text-indigo-300">Quick Links</h4>
+                        <ul class="space-y-2">
+                            <li><a href="#features" class="text-gray-300 hover:text-indigo-400 transition-colors duration-300 text-sm" id="footer-features-link">Features</a></li>
+                            <li><a href="#how-it-works" class="text-gray-300 hover:text-indigo-400 transition-colors duration-300 text-sm" id="footer-how-link">How It Works</a></li>
+                            <li><button id="footer-get-started" class="text-gray-300 hover:text-indigo-400 transition-colors duration-300 text-sm">Start Building</button></li>
+                        </ul>
+                    </div>
+
+                    <!-- Developer Info -->
+                    <div class="text-center md:text-right">
+                            <p class="text-gray-300 mb-2 text-sm">Developed with by</p>
+                            <p class="text-xl font-bold bg-gradient-to-r from-indigo-400 to-purple-400 bg-clip-text text-transparent">Ahmed Nada</p>
+                            <div class="flex justify-center md:justify-end space-x-3 mt-3">
+                                <a href="https://www.linkedin.com/in/ahmed-nada-05a536316/" 
+                                class="text-gray-400 hover:text-indigo-400 transition-colors duration-300"
+                                target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-linkedin text-lg"></i>
+                                </a>
+
+                                <a href="https://github.com/AhemdNada" 
+                                class="text-gray-400 hover:text-indigo-400 transition-colors duration-300"
+                                target="_blank" rel="noopener noreferrer">
+                                    <i class="fab fa-github text-lg"></i>
+                                </a>
+
+                                <a href="mailto:ahmednadaahmed79@gmail.com" 
+                                class="text-gray-400 hover:text-indigo-400 transition-colors duration-300">
+                                    <i class="fas fa-envelope text-lg"></i>
+                                </a>
+
+
+                            </div>
+                        
+                    </div>
+                </div>
+
+                <!-- Divider -->
+                <div class="border-t border-gray-700/50 mb-6"></div>
+
+                <!-- Bottom Section -->
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <div class="text-center md:text-left mb-4 md:mb-0">
+                        <p class="text-gray-400 text-sm">
+                            © 2024 CV Builder. All rights reserved.
+                        </p>
+                    </div>
+                    <div class="flex items-center space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300 text-sm">Privacy Policy</a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300 text-sm">Terms of Service</a>
+                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors duration-300 text-sm">Contact</a>
+                    </div>
+                </div>
             </div>
-        </div>
-    </main>
-
+        </footer>
+<script>
+    AOS.init({
+    duration: 800,      // مدة الأنيميشن بالملي ثانية
+    easing: 'ease-in-out', // نوع الحركة
+    once: false,         // الأنيميشن يظهر كل مرة
+    mirror: true       // لو true هيظهر لما تطلع كمان مش بس تنزل
+  });
+</script>
+<!-- AOS JS (keep only the latest version and before init) -->
+<script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
-<script src="https://unpkg.com/html-docx-js/dist/html-docx.js"></script>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const formPanel = document.querySelector('.form-panel');
-
-    // Check if required libraries are loaded
-    function checkLibraries() {
-        const libraries = {
-            'jsPDF': typeof window.jspdf !== 'undefined',
-            'html2canvas': typeof html2canvas !== 'undefined',
-            'FileSaver': typeof saveAs !== 'undefined'
-        };
-        
-        const missingLibraries = Object.entries(libraries)
-            .filter(([name, loaded]) => !loaded)
-            .map(([name]) => name);
-            
-        if (missingLibraries.length > 0) {
-            console.warn('Missing libraries:', missingLibraries);
-            return false;
-        }
-        
-        console.log('All required libraries loaded successfully');
-        return true;
-    }
-
-    // Check libraries after a short delay to ensure they're loaded
-    setTimeout(() => {
-        if (!checkLibraries()) {
-            console.error('Some required libraries failed to load. Download functionality may not work.');
-        }
-        
-        // Test if download buttons exist
-        const pdfBtn = document.getElementById('download-pdf-btn');
-        const jpgBtn = document.getElementById('download-jpg-btn');
-        
-        if (pdfBtn) {
-            console.log('PDF download button found');
-        } else {
-            console.error('PDF download button not found!');
-        }
-        
-        if (jpgBtn) {
-            console.log('JPG download button found');
-        } else {
-            console.error('JPG download button not found!');
-        }
-    }, 2000); // Increased to 2 seconds
-
-    // --- TEMPLATES for dynamic entries ---
-    const educationTemplate = `<div class="education-entry p-4 border rounded-md relative"><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div><label>Degree</label><input type="text" class="input-edu-degree" value=""></div><div><label>University</label><input type="text" class="input-edu-university" value=""></div><div><label>Years</label><input type="text" class="input-edu-years" value=""></div><div><label>Location</label><input type="text" class="input-edu-location" value=""></div></div><button type="button" class="remove-btn absolute top-2 right-2">&times;</button></div>`;
-    const projectTemplate = `<div class="project-entry p-4 border rounded-md relative"><div class="space-y-4"><div><label>Project Title</label><input type="text" class="input-project-title" value=""></div><div><label>Project Description</label><textarea class="input-project-desc" rows="4"></textarea></div></div><button type="button" class="remove-btn absolute top-2 right-2">&times;</button></div>`;
-    const languageTemplate = `<div class="language-entry flex items-center gap-2"><input type="text" class="input-language" placeholder="e.g., English" value=""><button type="button" class="remove-btn">&times;</button></div>`;
-    const socialTemplate = `<div class="social-entry p-4 border rounded-md relative"><div class="grid grid-cols-1 md:grid-cols-2 gap-4"><div><label>Platform</label><select class="input-social-platform w-full border border-gray-300 rounded px-3 py-2"><option value="">Select Platform</option><option value="LinkedIn">LinkedIn</option><option value="GitHub">GitHub</option><option value="Twitter">Twitter</option><option value="Instagram">Instagram</option><option value="Facebook">Facebook</option><option value="Portfolio">Portfolio</option></select></div><div><label>Username/Profile</label><input type="text" class="input-social-profile" placeholder="e.g., ahmed-nada" value=""></div></div><button type="button" class="remove-btn absolute top-2 right-2">&times;</button></div>`;
-
-    // --- Master Update Function ---
-    function updatePreview() {
-        const previewArea = document.getElementById('preview-area');
-        previewArea.innerHTML = ''; // Clear previous pages
-
-        // Helper to create a DOM node from an HTML string
-        function createNodeFromHTML(htmlString) {
-            const div = document.createElement('div');
-            div.innerHTML = htmlString.trim();
-            return div.firstChild;
-        }
-
-        // 1. Collect all content pieces as DOM nodes
-        const contentNodes = [];
-
-        // Profile 
-        contentNodes.push(
-  createNodeFromHTML(`
-    <div class="cv-section">
-      <h3 id="preview-profile-title">
-        <i class="fa-solid fa-address-card text-main-color mr-2"></i>Profile
-      </h3>
-      <p>${document.getElementById('input-profile').value.replace(/\n/g, '<br>')}</p>
-    </div>
-  `)
-);
-
-        // Education
-        const eduEntries = document.querySelectorAll('.education-entry');
-if (eduEntries.length > 0) {
-    let eduHTML = `
-        <div class="cv-section">
-            <h3 id="preview-education-title">
-                <i class="fas fa-graduation-cap text-main-color mr-2"></i>Education
-            </h3>
-    `;
-    eduEntries.forEach(entry => {
-        eduHTML += `
-            <div class="flex justify-between items-start mb-2">
-                <div>
-                    <p class="font-semibold">${entry.querySelector('.input-edu-degree').value}</p>
-                    <p class="text-gray-600 text-sm">${entry.querySelector('.input-edu-university').value}</p>
-                </div>
-                <div class="text-right">
-                    <p class="font-semibold">${entry.querySelector('.input-edu-years').value}</p>
-                    <p class="text-gray-600 text-sm">${entry.querySelector('.input-edu-location').value}</p>
-                </div>
-            </div>
-        `;
-    });
-    eduHTML += '</div>';
-    contentNodes.push(createNodeFromHTML(eduHTML));
-}
-
-
-        // Skills
-const skills = document.getElementById('input-skills').value.split(',').map(s => s.trim()).filter(Boolean);
-if (skills.length > 0) {
-    let skillsHTML = `
-        <div class="cv-section">
-            <h3 id="preview-skills-title">
-                <i class="fas fa-tools text-main-color mr-2"></i>Skills
-            </h3>
-            <div class="grid grid-cols-3 gap-x-8 gap-y-1">
-    `;
-    skills.forEach(skill => {
-        skillsHTML += `<span>• ${skill}</span>`;
-    });
-    skillsHTML += '</div></div>';
-    contentNodes.push(createNodeFromHTML(skillsHTML));
-}
-
-// Projects (granularly)
-const projectEntries = document.querySelectorAll('.project-entry');
-if (projectEntries.length > 0) {
-    // Add header with icon
-    contentNodes.push(createNodeFromHTML(`
-        <div class="cv-section">
-            <h3 id="preview-projects-title">
-                <i class="fas fa-folder-open text-main-color mr-2"></i>Projects
-            </h3>
-        </div>
-    `));
-
-    // Add each project item as a separate node
-    projectEntries.forEach(entry => {
-        const projectItemHTML = `
-            <div class="project-item mb-4">
-                <h4 class="font-bold">${entry.querySelector('.input-project-title').value}</h4>
-                <p class="mt-1 text-sm leading-relaxed">
-                    ${entry.querySelector('.input-project-desc').value.replace(/\n/g, '<br>')}
-                </p>
-            </div>
-        `;
-        contentNodes.push(createNodeFromHTML(projectItemHTML));
-    });
-}
-
-
-        // Languages
-        const langEntries = document.querySelectorAll('.language-entry');
-const validLangs = Array.from(langEntries)
-    .map(entry => entry.querySelector('.input-language').value)
-    .filter(Boolean);
-
-if (validLangs.length > 0) {
-    let langsHTML = `
-        <div class="cv-section">
-            <h3 id="preview-languages-title">
-                <i class="fa-solid fa-earth-americas text-main-color mr-2"></i>Languages
-            </h3>
-            <div class="flex space-x-12">
-    `;
-    validLangs.forEach(lang => {
-        langsHTML += `<span>• ${lang}</span>`;
-    });
-    langsHTML += '</div></div>';
-    contentNodes.push(createNodeFromHTML(langsHTML));
-}
-
-
-
-        // 2. Paginate the nodes
-        let currentPage = createNewPage(previewArea);
-        let body = currentPage.querySelector('.cv-body');
-        const availableHeight = body.clientHeight;
-
-        for (const node of contentNodes) {
-            body.appendChild(node);
-            if (body.scrollHeight > availableHeight) {
-                body.removeChild(node);
-                currentPage = createNewPage(previewArea);
-                body = currentPage.querySelector('.cv-body');
-                body.appendChild(node);
-            }
-        }
-    }
-    
-    function createNewPage(container) {
-    const page = document.createElement('div');
-    page.className = 'page';
-    
-    // Collect social links
-    const socialEntries = document.querySelectorAll('.social-entry');
-    let socialLinksHTML = '';
-    socialEntries.forEach(entry => {
-        const platform = entry.querySelector('.input-social-platform').value;
-        const profile = entry.querySelector('.input-social-profile').value;
-        if (platform && profile) {
-            let iconClass = 'fas fa-link'; // default icon
-            switch(platform.toLowerCase()) {
-                case 'linkedin':
-                    iconClass = 'fab fa-linkedin';
-                    break;
-                case 'github':
-                    iconClass = 'fab fa-github';
-                    break;
-                case 'twitter':
-                    iconClass = 'fab fa-twitter';
-                    break;
-                case 'instagram':
-                    iconClass = 'fab fa-instagram';
-                    break;
-                case 'facebook':
-                    iconClass = 'fab fa-facebook';
-                    break;
-                case 'portfolio':
-                    iconClass = 'fas fa-briefcase';
-                    break;
-            }
-            socialLinksHTML += `<span><i class="${iconClass} text-main-color mr-1"></i>${profile}</span>`;
-        }
-    });
-    
-    const headerHTML = `
-        <header class="cv-header text-center">
-            <h1>${document.getElementById('input-name').value}</h1>
-            <h2>${document.getElementById('input-title').value}</h2>
-        </header>
-        <div class="cv-contact flex flex-wrap justify-center items-center gap-x-4 gap-y-2 text-sm text-gray-700">
-            <span><i class="fas fa-envelope text-main-color mr-1"></i>${document.getElementById('input-email').value}</span>
-            <span><i class="fas fa-phone text-main-color mr-1"></i>${document.getElementById('input-phone').value}</span>
-            <span><i class="fas fa-map-marker-alt text-main-color mr-1"></i>${document.getElementById('input-location').value}</span>
-            ${socialLinksHTML}
-        </div>
-        <main class="cv-body"></main>
-    `;
-    
-    page.innerHTML = headerHTML;
-    container.appendChild(page);
-    return page;
-}
-
-    // --- Event Delegation ---
-    formPanel.addEventListener('input', updatePreview);
-
-    formPanel.addEventListener('click', function(e) {
-        const target = e.target;
-        let containerId = null;
-        let template = null;
-        
-        if (target.id === 'add-education-btn') {
-            containerId = 'education-form-container';
-            template = educationTemplate;
-        } else if (target.id === 'add-project-btn') {
-            containerId = 'projects-form-container';
-            template = projectTemplate;
-        } else if (target.id === 'add-language-btn') {
-            containerId = 'languages-form-container';
-            template = languageTemplate;
-        } else if (target.id === 'add-social-btn') {
-            containerId = 'social-links-container';
-            template = socialTemplate;
-        } else if (target.classList.contains('remove-btn')) {
-            target.closest('.education-entry, .project-entry, .language-entry, .social-entry').remove();
-            updatePreview();
-        }
-        
-        if(containerId && template) {
-            document.getElementById(containerId).insertAdjacentHTML('beforeend', template);
-            updatePreview();
-        }
-    });
-
-    // --- Initial Population ---
-    function addInitialEntry(section, data) {
-        let containerId = '';
-        if (section === 'education') containerId = 'education-form-container';
-        else if (section === 'projects') containerId = 'projects-form-container';
-        else if (section === 'languages') containerId = 'languages-form-container';
-        else if (section === 'social') containerId = 'social-links-container';
-        
-        const container = document.getElementById(containerId);
-        if (!container) {
-            console.error(`Container not found: ${containerId}`);
-            return;
-        }
-        
-        let template = '';
-        if (section === 'education') template = educationTemplate;
-        else if (section === 'projects') template = projectTemplate;
-        else if (section === 'languages') template = languageTemplate;
-        else if (section === 'social') template = socialTemplate;
-        
-        container.insertAdjacentHTML('beforeend', template);
-        const newEntry = container.lastElementChild;
-
-        if (section === 'education') {
-            newEntry.querySelector('.input-edu-degree').value = data.degree || '';
-            newEntry.querySelector('.input-edu-university').value = data.university || '';
-            newEntry.querySelector('.input-edu-years').value = data.years || '';
-            newEntry.querySelector('.input-edu-location').value = data.location || '';
-        } else if (section === 'projects') {
-             newEntry.querySelector('.input-project-title').value = data.title || '';
-             newEntry.querySelector('.input-project-desc').value = data.desc || '';
-        } else if (section === 'languages') {
-            newEntry.querySelector('.input-language').value = data.lang || '';
-        } else if (section === 'social') {
-            newEntry.querySelector('.input-social-platform').value = data.platform || '';
-            newEntry.querySelector('.input-social-profile').value = data.profile || '';
-        }
-        
-        // Update preview after adding each entry
-        updatePreview();
-    }
-
-    // Populate with initial data
-    setTimeout(() => {
-        addInitialEntry('education', { degree: 'Computer Science and Artificial Intelligence', university: 'El Alamein, Egypt', years: '2022 - 2026', location: 'Alex,Egypt' });
-        addInitialEntry('projects', { title: 'Modern Portfolio', desc: 'My project is a modern portfolio website that showcases my work, skills, and certifications in a clean, professional layout. It features project highlights, an interactive contact form, and a comment section for user engagement — all designed to reflect my identity and offer a smooth user experience.' });
-        addInitialEntry('languages', { lang: 'Arabic' });
-        addInitialEntry('languages', { lang: 'English' });
-        addInitialEntry('social', { platform: 'LinkedIn', profile: 'ahmed-nada-05a536316' });
-        addInitialEntry('social', { platform: 'GitHub', profile: 'AhemdNada' });
-        
-        // Final update to ensure everything is displayed
-        updatePreview();
-    }, 500);
-
-    // --- Download Functionality ---
-    document.getElementById('download-pdf-btn').addEventListener('click', async () => {
-        console.log('PDF button clicked!');
-        try {
-            if (typeof window.jspdf === 'undefined' || typeof html2canvas === 'undefined') {
-                alert('A required library (jsPDF or html2canvas) is not loaded. Please refresh and try again.');
-                return;
-            }
-            
-            const { jsPDF } = window.jspdf;
-            const previewArea = document.getElementById('preview-area');
-            const pages = previewArea.querySelectorAll('.page');
-            
-            if (pages.length === 0) {
-                alert('CV preview is empty. Please add some content first.');
-                return;
-            }
-
-            const originalTransform = previewArea.style.transform;
-            previewArea.style.transform = 'scale(1)';
-            // Add a class to hide scrollbars during capture
-            previewArea.classList.add('is-capturing');
-            await new Promise(resolve => setTimeout(resolve, 100));
-
-            const doc = new jsPDF('p', 'pt', 'a4', true);
-
-            for (let i = 0; i < pages.length; i++) {
-                const page = pages[i];
-                const canvas = await html2canvas(page, { 
-                    scale: 2, // <--- Increased scale for better quality
-                    useCORS: true,
-                    logging: false,
-                    width: page.offsetWidth,
-                    height: page.offsetHeight,
-                    backgroundColor: '#ffffff'
-                });
-                const imgData = canvas.toDataURL('image/png');
-                const pdfWidth = doc.internal.pageSize.getWidth();
-                const pdfHeight = doc.internal.pageSize.getHeight();
-                
-                if (i > 0) {
-                    doc.addPage();
-                }
-                doc.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
-            }
-            
-            doc.save('cv.pdf');
-            
-            previewArea.style.transform = originalTransform;
-            previewArea.classList.remove('is-capturing');
-            
-        } catch (error) {
-            console.error('Error generating PDF:', error);
-            alert('An error occurred while generating the PDF. Check the console for details.');
-        }
-    });
-
-    document.getElementById('download-jpg-btn').addEventListener('click', async () => {
-        console.log('JPG button clicked!');
-        try {
-            if (typeof html2canvas === 'undefined') {
-                alert('html2canvas library not loaded. Please refresh and try again.');
-                return;
-            }
-
-            const previewArea = document.getElementById('preview-area');
-            const pages = previewArea.querySelectorAll('.page');
-
-            if (pages.length === 0) {
-                alert('CV preview is empty. Please add some content first.');
-                return;
-            }
-
-            const originalTransform = previewArea.style.transform;
-            previewArea.style.transform = 'scale(1)';
-            previewArea.classList.add('is-capturing');
-            await new Promise(resolve => setTimeout(resolve, 100));
-
-            for (let i = 0; i < pages.length; i++) {
-                const page = pages[i];
-                const canvas = await html2canvas(page, {
-                    scale: 2, // <--- Increased scale for better quality
-                    useCORS: true,
-                    logging: false,
-                    width: page.offsetWidth,
-                    height: page.offsetHeight,
-                    backgroundColor: '#ffffff'
-                });
-
-                const image = canvas.toDataURL('image/jpeg', 0.95); // High quality JPEG
-
-                const link = document.createElement('a');
-                link.href = image;
-                link.download = `cv-page-${i + 1}.jpg`;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-
-                if (i < pages.length - 1) {
-                    await new Promise(resolve => setTimeout(resolve, 300));
-                }
-            }
-
-            previewArea.style.transform = originalTransform;
-            previewArea.classList.remove('is-capturing');
-
-        } catch (error) {
-            console.error('Error in JPG generation:', error);
-            alert('An error occurred while generating the JPG. Check the console for details.');
-        }
-    });
-});
-</script>
-
+<script src="Js/main.js"></script>
 </body>
 </html>
