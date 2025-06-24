@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label>Degree</label>
-                        <input type="text" class="input-edu-degree w-full" placeholder="e.g., Bachelor of Science">
+                        <input type="text" class="input-edu-degree w-full" placeholder="e.g., Computer Science and Artificial Intelligence">
                     </div>
                     <div>
                         <label>University</label>
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                     <div>
                         <label>Years</label>
-                        <input type="text" class="input-edu-years w-full" placeholder="e.g., 2018 - 2022">
+                        <input type="text" class="input-edu-years w-full" placeholder="e.g., 2022 - 2026">
                     </div>
                     <div>
                         <label>Location</label>
@@ -860,7 +860,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 if (skills.length > 0) {
                                     let skillsHTML = `<div class="cv-section"><h3 id="preview-skills-title"><i class="fas fa-tools text-black"></i>Skills</h3><div class="grid grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-2">`;
                                     skills.forEach(skill => {
-                                        skillsHTML += `<span class="flex items-center"><i class="fas fa-check text-black mr-2 text-xs"></i>${skill}</span>`;
+                                        skillsHTML += `<span class="flex items-center"><span class="text-black mr-2 text-lg">•</span>${skill}</span>`;
                                     });
                                     skillsHTML += '</div></div>';
                                     contentNodes.skills = createNodeFromHTML(skillsHTML);
@@ -878,7 +878,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 if (validLangs.length > 0) {
                                     let langsHTML = `<div class="cv-section"><h3 id="preview-languages-title"><i class="fas fa-language text-black"></i>Languages</h3><div class="flex flex-wrap gap-x-12 gap-y-2">`;
                                     validLangs.forEach(lang => {
-                                        langsHTML += `<span class="flex items-center"><i class="fas fa-check text-black mr-2 text-xs"></i>${lang}</span>`;
+                                        langsHTML += `<span class="flex items-center"><span class="text-black mr-2 text-lg">•</span>${lang}</span>`;
                                     });
                                     langsHTML += '</div></div>';
                                     contentNodes.languages = createNodeFromHTML(langsHTML);
@@ -903,7 +903,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                 if (interests.length > 0) {
                                     let interestsHTML = `<div class="cv-section"><h3 id="preview-interests-title"><i class="fas fa-heart text-black"></i>Interests</h3><div class="flex flex-wrap gap-x-8 gap-y-2">`;
                                     interests.forEach(interest => {
-                                        interestsHTML += `<span class="flex items-center"><i class="fas fa-check text-black mr-2 text-xs"></i>${interest}</span>`;
+                                        interestsHTML += `<span class="flex items-center"><span class="text-black mr-2 text-lg">•</span>${interest}</span>`;
                                     });
                                     interestsHTML += '</div></div>';
                                     contentNodes.interests = createNodeFromHTML(interestsHTML);
